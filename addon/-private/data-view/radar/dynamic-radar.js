@@ -199,7 +199,10 @@ export default class DynamicRadar extends Radar {
         margin = currentItemTop - getScaledClientRect(_occludedContentBefore, _transformScale).bottom;
       }
 
-      const newHeight = roundTo(currentItemHeight + margin);
+      let newHeight = roundTo(currentItemHeight + margin);
+      if (newHeight < 0) {
+        newHeight = currentItemHeight;
+      }
       const itemDelta = skipList.set(itemIndex, newHeight);
 
       if (newHeight < this._minHeight) {
